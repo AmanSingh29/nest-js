@@ -7,14 +7,17 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Controller('student')
 export class StudentController {
   constructor(private readonly service: StudentService) {}
 
   @Get()
+  @UseGuards(AuthGuard)
   getAll() {
     return this.service.getAllStudents();
   }
